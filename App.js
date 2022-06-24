@@ -1,20 +1,56 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { useCallback, useEffect } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  // Appearance,
+  TouchableOpacity,
+  useColorScheme,
+} from "react-native";
+import Home from "./src/screens/Home";
 
-export default function App() {
+const Appearnce2 = () => {
+  const colorScheme = useColorScheme();
+
+  const themeTextStyle =
+    colorScheme === "light" ? styles.lightThemeText : styles.darkThemeText;
+  const themeContainerStyle =
+    colorScheme === "light" ? styles.lightContainer : styles.darkContainer;
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={[styles.container, themeContainerStyle]}>
+      <Home
+        themeTextStyle={themeTextStyle}
+        colorScheme={colorScheme}
+        styles={styles}
+      />
+
+      <StatusBar />
     </View>
   );
+};
+
+export default function App() {
+  return <Appearnce2 />;
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  lightContainer: {
+    backgroundColor: "#d0d0c0",
+  },
+  darkContainer: {
+    backgroundColor: "#242c40",
+  },
+  lightThemeText: {
+    color: "#242c40",
+  },
+  darkThemeText: {
+    color: "#d0d0c0",
   },
 });
