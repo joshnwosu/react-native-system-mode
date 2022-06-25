@@ -21,6 +21,7 @@ const Appearnce2 = () => {
 
   return (
     <>
+      <StatusBar style="dark" />
       <MyStack />
 
       {/* <View style={[styles.container, themeContainerStyle]}>
