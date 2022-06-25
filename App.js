@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   useColorScheme,
 } from "react-native";
+import MyStack from "./src/navigation/AppNavigator";
 import Home from "./src/screens/Home";
 
 const Appearnce2 = () => {
@@ -19,15 +20,19 @@ const Appearnce2 = () => {
     colorScheme === "light" ? styles.lightContainer : styles.darkContainer;
 
   return (
-    <View style={[styles.container, themeContainerStyle]}>
-      <Home
-        themeTextStyle={themeTextStyle}
-        colorScheme={colorScheme}
-        styles={styles}
-      />
+    <>
+      <MyStack />
 
-      <StatusBar />
-    </View>
+      {/* <View style={[styles.container, themeContainerStyle]}>
+        <Home
+          themeTextStyle={themeTextStyle}
+          colorScheme={colorScheme}
+          styles={styles}
+        />
+
+        <StatusBar />
+      </View> */}
+    </>
   );
 };
 
