@@ -4,9 +4,7 @@ import React from "react";
 export default function Home({ themeTextStyle, colorScheme, styles }) {
   return (
     <View>
-      <Text style={[styles.text, themeTextStyle]}>
-        Color scheme: {colorScheme}
-      </Text>
+      <Text style={{ color: "red" }}>Color scheme: {colorScheme}</Text>
     </View>
   );
 }

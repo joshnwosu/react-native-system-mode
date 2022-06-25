@@ -1,22 +1,28 @@
 import React from "react";
-import { View } from "react-native";
+import { View, Text, Button } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+// import Home from "../screens/Home";
 
 const Stack = createNativeStackNavigator();
 
-const Home = () => {
+const Home = ({ navigation }) => {
   return (
-    <View>
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text>Home Screen</Text>
+      <Button
+        title="Go to Profile"
+        onPress={() => navigation.navigate("Profile")}
+      />
     </View>
   );
 };
 
-const Profile = () => {
+const Profile = ({ navigation }) => {
   return (
-    <View>
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text>Profile Screen</Text>
+      <Button title="Go to Home" onPress={() => navigation.navigate("Home")} />
     </View>
   );
 };
