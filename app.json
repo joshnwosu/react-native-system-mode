@@ -17,7 +17,8 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "userInterfaceStyle": "automatic"
+      "userInterfaceStyle": "automatic",
+      "requireFullScreen": true
     },
     "android": {
       "adaptiveIcon": {
