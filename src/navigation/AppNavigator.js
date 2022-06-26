@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -7,6 +7,7 @@ import {
   ScrollView,
   FlatList,
   StyleSheet,
+  SafeAreaView,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -71,11 +72,66 @@ const DATA = [
     title: "Second Item",
     color: "white",
   },
+  {
+    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+    title: "First Item",
+    color: "red",
+  },
+  {
+    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+    title: "Second Item",
+    color: "blue",
+  },
+  {
+    id: "58694a0f-3da1-471f-bd96-145571e29d72",
+    title: "Third Item",
+    color: "purple",
+  },
+  {
+    id: "58694a0f-3da1-471f-bd96-145571e29d72",
+    title: "Fourth Item",
+    color: "orange",
+  },
+  {
+    id: "58694a0f-3da1-471f-bd96-145571e29d72",
+    title: "Fifth Item",
+    color: "yellow",
+  },
+  {
+    id: "58694a0f-3da1-471f-bd96-145571e29d72",
+    title: "Sixth Item",
+    color: "green",
+  },
+  {
+    id: "58694a0f-3da1-471f-bd96-145571e29d72",
+    title: "Seventh Item",
+    color: "purple",
+  },
+  {
+    id: "58694a0f-3da1-471f-bd96-145571e29d72",
+    title: "Eigth Item",
+    color: "#444",
+  },
+  {
+    id: "58694a0f-3da1-471f-bd96-145571e29d72",
+    title: "Nineth Item",
+    color: "magenta",
+  },
+  {
+    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+    title: "First Item",
+    color: "brown",
+  },
+  {
+    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+    title: "Second Item",
+    color: "white",
+  },
 ];
 
 const Item = ({ item, navigation }) => (
   <TouchableOpacity
-    onPress={() => navigation.navigate("Profile")}
+    onPress={() => navigation.navigate("Profile", { bgColor: item.color })}
     style={[styles.item, { backgroundColor: item.color }]}
   >
     <Text style={styles.title}>{item.title}</Text>
@@ -85,36 +141,57 @@ const Item = ({ item, navigation }) => (
 const HomeScreen = ({ navigation }) => {
   const renderItem = ({ item }) => <Item item={item} navigation={navigation} />;
   return (
-    <View
-      style={{
-        flex: 1,
-      }}
-    >
-      <Text>Home Screen</Text>
-      <Button
-        title="Go to Profile"
-        onPress={() => navigation.navigate("Profile")}
-      />
-
-      <FlatList
-        data={DATA}
-        contentInsetAdjustmentBehavior="automatic"
-        renderItem={renderItem}
-        keyExtractor={(item, index) => index.toString()}
-      />
-    </View>
+    <FlatList
+      data={DATA}
+      contentInsetAdjustmentBehavior="automatic"
+      renderItem={renderItem}
+      keyExtractor={(_, index) => index.toString()}
+    />
   );
 };
 
-const ProfileScreen = ({ navigation }) => {
+const ProfileScreen = (props) => {
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+    <ScrollView
+      contentInsetAdjustmentBehavior="automatic"
+      contentContainerStyle={{
+        flex: 1,
+        alignItems: "center",
+        paddingHorizontal: 10,
+      }}
+    >
+      {/* <SafeAreaView style={{ flex: 1 }}> */}
       <Text>Profile Screen</Text>
       <Button
         title="Go to Details"
-        onPress={() => navigation.navigate("Details")}
+        onPress={() => props.navigation.navigate("Details")}
       />
-    </View>
+      <View
+        style={{
+          width: "100%",
+          height: 300,
+          backgroundColor: props?.route?.params?.bgColor || "white",
+          marginBottom: 10,
+        }}
+      />
+      <View
+        style={{
+          width: "100%",
+          height: 300,
+          backgroundColor: props?.route?.params?.bgColor || "white",
+          marginBottom: 10,
+        }}
+      />
+      <View
+        style={{
+          width: "100%",
+          height: 300,
+          backgroundColor: props?.route?.params?.bgColor || "white",
+          marginBottom: 10,
+        }}
+      />
+      {/* </SafeAreaView> */}
+    </ScrollView>
   );
 };
 
@@ -135,25 +212,30 @@ function DetailsScreen({ navigation }) {
 const MyStack = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerTransparent: true,
+          headerBlurEffect: "prominent",
+        }}
+      >
         <Stack.Screen
           name="Home"
           component={HomeScreen}
           options={{
-            headerTranslucent: true,
-            headerTransparent: true,
-            headerBlurEffect: "prominent",
+            // headerTranslucent: true,
+            // headerTransparent: true,
+            // headerBlurEffect: "prominent",
             headerLargeTitle: true,
             headerBackTitle: "This",
-            // headerRight: () => (
-            //   <TouchableOpacity onPress={() => alert("This is a button!")}>
-            //     <Ionicons
-            //       name="information-outline"
-            //       color="#000000"
-            //       size={24}
-            //     />
-            //   </TouchableOpacity>
-            // ),
+            headerRight: () => (
+              <TouchableOpacity onPress={() => alert("This is a button!")}>
+                <Ionicons
+                  name="information-outline"
+                  color="#000000"
+                  size={24}
+                />
+              </TouchableOpacity>
+            ),
           }}
         />
         <Stack.Screen name="Profile" component={ProfileScreen} />
