@@ -122,10 +122,12 @@ const DATA = [
 
 const Item = ({ item, navigation }) => (
   <TouchableOpacity
-    onPress={() => navigation.navigate("Profile", { bgColor: item.color })}
+    onPress={() => {
+      navigation.navigate("ColorScreen", { bgColor: item.color });
+    }}
     style={[styles.item, { backgroundColor: item.color }]}
   >
-    <Text style={styles.title}>{item.title}</Text>
+    <Text style={styles.title}>{item.color}</Text>
   </TouchableOpacity>
 );
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Button, ScrollView, StyleSheet, Text, View } from "react-native";
 
 export default ProfileScreen = (props) => {
   return (
@@ -11,32 +11,33 @@ export default ProfileScreen = (props) => {
         paddingHorizontal: 10,
       }}
     >
-      {["one", "two", "three"].map((item, index) => {
-        return (
-          <TouchableOpacity
-            key={index}
-            // onPress={() => props?.navigation.navigate("DetailsScreen")}
-            onPress={() => console.log(props)}
-            style={{
-              width: "100%",
-              height: 200,
-              backgroundColor: props?.route?.params?.bgColor || "white",
-              marginBottom: 10,
-              padding: 20,
-            }}
-          >
-            <Text
-              style={{
-                fontSize: 20,
-                textTransform: "uppercase",
-                fontWeight: "bold",
-              }}
-            >
-              {item}
-            </Text>
-          </TouchableOpacity>
-        );
-      })}
+      <Text>Profile Screen</Text>
+      <Button
+        title="Go to Details"
+        onPress={() => props.navigation.navigate("DetailsScreen")}
+      />
+
+      <View
+        style={[
+          styles.shadowProp,
+          {
+            width: "100%",
+            height: 300,
+            backgroundColor: "white",
+            marginBottom: 10,
+            borderRadius: 10,
+          },
+        ]}
+      />
     </ScrollView>
   );
 };
+
+const styles = StyleSheet.create({
+  shadowProp: {
+    shadowColor: "#171717",
+    shadowOffset: { width: -2, height: 10 },
+    shadowOpacity: 0.2,
+    shadowRadius: 30,
+  },
+});
