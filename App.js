@@ -8,8 +8,10 @@ import {
   TouchableOpacity,
   useColorScheme,
 } from "react-native";
+
+import { NavigationContainer } from "@react-navigation/native";
 import MyStack from "./src/navigation/AppNavigator";
-import Home from "./src/screens/Home";
+import BottomNavigator from "./src/navigation/BottomNavigator";
 
 const Appearnce2 = () => {
   const colorScheme = useColorScheme();
@@ -22,9 +24,11 @@ const Appearnce2 = () => {
   return (
     <>
       <StatusBar style="dark" />
-      <MyStack />
+      <NavigationContainer>
+        {/* <MyStack /> */}
+        <BottomNavigator />
 
-      {/* <View style={[styles.container, themeContainerStyle]}>
+        {/* <View style={[styles.container, themeContainerStyle]}>
         <Home
           themeTextStyle={themeTextStyle}
           colorScheme={colorScheme}
@@ -33,6 +37,7 @@ const Appearnce2 = () => {
 
         <StatusBar />
       </View> */}
+      </NavigationContainer>
     </>
   );
 };
