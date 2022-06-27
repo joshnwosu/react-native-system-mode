@@ -25,7 +25,10 @@ const BottomNavigator = () => {
           fontSize: 12,
           fontWeight: "bold",
         },
-        tabBarStyle: { position: "absolute" },
+        tabBarStyle: {
+          position: "absolute",
+          backgroundColor: "rgba(255,255,255,0.5)",
+        },
         tabBarBackground: () => (
           <BlurView
             tint="light"

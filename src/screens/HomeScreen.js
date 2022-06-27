@@ -6,6 +6,7 @@ import {
   StyleSheet,
 } from "react-native";
 import React from "react";
+import { useScrollToTop } from "@react-navigation/native";
 
 const DATA = [
   {
@@ -132,9 +133,20 @@ const Item = ({ item, navigation }) => (
 );
 
 export default HomeScreen = ({ navigation }) => {
+  const ref = React.useRef(null);
+
+  // useScrollToTop(ref);
+
+  useScrollToTop(
+    React.useRef({
+      scrollToTop: () => ref.current?.scrollToOffset({ offset: 100 }),
+    })
+  );
+
   const renderItem = ({ item }) => <Item item={item} navigation={navigation} />;
   return (
     <FlatList
+      ref={ref}
       data={DATA}
       contentInsetAdjustmentBehavior="automatic"
       renderItem={renderItem}
@@ -150,9 +162,9 @@ const styles = StyleSheet.create({
   item: {
     backgroundColor: "#fff",
     padding: 20,
-    marginVertical: 8,
+    // marginVertical: 8,
     marginHorizontal: 16,
-    borderRadius: 10,
+    borderRadius: 0,
   },
   title: {
     fontSize: 20,

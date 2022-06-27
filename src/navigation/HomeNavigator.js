@@ -14,6 +14,9 @@ export default function HomeNavigator() {
       screenOptions={{
         headerTransparent: true,
         headerBlurEffect: "prominent",
+        headerStyle: {
+          backgroundColor: "rgba(255,255,255,.5)",
+        },
       }}
     >
       <Stack.Screen

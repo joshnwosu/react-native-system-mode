@@ -24,7 +24,7 @@ const MyStack = () => {
         headerTransparent: true,
         headerBlurEffect: "prominent",
         //   headerStyle: {
-        //     backgroundColor: "rgba(255,255,255,.7)",
+        //     backgroundColor: "rgba(255,255,255,.8)",
         //   },
       }}
     >
