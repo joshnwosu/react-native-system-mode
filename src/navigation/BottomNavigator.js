@@ -8,6 +8,8 @@ import { StyleSheet, View } from "react-native";
 import { BlurView } from "expo-blur";
 import HomeNavigator from "./HomeNavigator";
 import NotificationNavigator from "./NotificationNavigator";
+import ExploreNavigator from "./ExploreNavigator";
+import ProfileNavigator from "./ProfileNavigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -65,7 +67,7 @@ const BottomNavigator = () => {
       />
       <Tab.Screen
         name="Explore"
-        component={ExploreScreen}
+        component={ExploreNavigator}
         options={{
           tabBarIcon: ({ color, size, focused }) => (
             <View>
@@ -80,7 +82,7 @@ const BottomNavigator = () => {
       />
       <Tab.Screen
         name="Profile"
-        component={ProfileScreen}
+        component={ProfileNavigator}
         options={{
           tabBarIcon: ({ color, size, focused }) => (
             <View>

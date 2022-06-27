@@ -3,9 +3,11 @@ import { Ionicons } from "@expo/vector-icons";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Text, TouchableOpacity } from "react-native";
 import NotificationScreen from "../screens/NotificationScreen";
+import ProfileScreen from "../screens/ProfileScreen";
+import DetailsScreen from "../screens/DetailsScreen";
 const Stack = createNativeStackNavigator();
 
-export default function ExploreNavigator() {
+export default function ProfileNavigator() {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -15,13 +17,18 @@ export default function ExploreNavigator() {
     >
       <Stack.Screen
         name="ExploreScreen"
-        component={NotificationScreen}
+        component={ProfileScreen}
         options={{
-          title: "Explore",
+          title: "Profile",
           headerLargeTitle: true,
-          headerSearchBarOptions: {
-            placeholder: "Github search",
-          },
+        }}
+      />
+      <Stack.Screen
+        name="DetailsScreen"
+        component={DetailsScreen}
+        options={{
+          title: "Details",
+          // headerLargeTitle: true,
         }}
       />
     </Stack.Navigator>
