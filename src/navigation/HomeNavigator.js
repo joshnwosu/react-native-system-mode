@@ -8,10 +8,7 @@ import ProfileScreen from "../screens/ProfileScreen";
 import ColorScreen from "../screens/ColorScreen";
 const Stack = createNativeStackNavigator();
 
-export default function HomeNavigator(props, { navigation, route }) {
-  useEffect(() => {
-    console.log("Navigation pp: ", props);
-  }, []);
+export default function HomeNavigator() {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -38,10 +35,10 @@ export default function HomeNavigator(props, { navigation, route }) {
       <Stack.Screen
         name="ColorScreen"
         component={ColorScreen}
-        options={{
-          title: "Color",
+        options={({ route }) => ({
+          title: route.params.bgColor,
           headerLargeTitle: true,
-        }}
+        })}
       />
     </Stack.Navigator>
   );

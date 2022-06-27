@@ -27,7 +27,6 @@ export default ProfileScreen = (props) => {
         return (
           <TouchableOpacity
             key={index}
-            // onPress={() => props?.navigation.navigate("DetailsScreen")}
             onPress={() => alert("props")}
             style={[
               styles.shadowProp,
