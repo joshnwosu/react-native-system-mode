@@ -1,67 +1,34 @@
 import { StatusBar } from "expo-status-bar";
-import { useCallback, useEffect } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  // Appearance,
-  TouchableOpacity,
-  useColorScheme,
-} from "react-native";
+import { useCallback, useEffect, useState } from "react";
+import { Appearance } from "react-native";
 
-import { NavigationContainer } from "@react-navigation/native";
-import MyStack from "./src/navigation/AppNavigator";
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import BottomNavigator from "./src/navigation/BottomNavigator";
 
-const Appearnce2 = () => {
-  const colorScheme = useColorScheme();
-
-  const themeTextStyle =
-    colorScheme === "light" ? styles.lightThemeText : styles.darkThemeText;
-  const themeContainerStyle =
-    colorScheme === "light" ? styles.lightContainer : styles.darkContainer;
-
-  return (
-    <>
-      <StatusBar style="dark" />
-      <NavigationContainer>
-        {/* <MyStack /> */}
-        <BottomNavigator />
-
-        {/* <View style={[styles.container, themeContainerStyle]}>
-        <Home
-          themeTextStyle={themeTextStyle}
-          colorScheme={colorScheme}
-          styles={styles}
-        />
-
-        <StatusBar />
-      </View> */}
-      </NavigationContainer>
-    </>
-  );
+const MyTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: "#ED5B92",
+    background: "#F8F7F8",
+  },
 };
 
 export default function App() {
-  return <Appearnce2 />;
-}
+  const [theme, setTheme] = useState(Appearance.getColorScheme());
+  Appearance.addChangeListener((scheme) => {
+    setTheme(scheme.colorScheme);
+  });
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  lightContainer: {
-    backgroundColor: "#d0d0c0",
-  },
-  darkContainer: {
-    backgroundColor: "#242c40",
-  },
-  lightThemeText: {
-    color: "#242c40",
-  },
-  darkThemeText: {
-    color: "#d0d0c0",
-  },
-});
+  useEffect(() => {
+    console.log("Theme: ", theme);
+  }, [theme]);
+
+  return (
+    <>
+      <NavigationContainer>
+        <BottomNavigator theme={theme} />
+      </NavigationContainer>
+    </>
+  );
+}
