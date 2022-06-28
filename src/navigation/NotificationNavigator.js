@@ -1,7 +1,7 @@
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Text, TouchableOpacity } from "react-native";
+import { Platform, Text, TouchableOpacity } from "react-native";
 import NotificationScreen from "../screens/NotificationScreen";
 const Stack = createNativeStackNavigator();
 
@@ -9,8 +9,15 @@ export default function NotificationNavigator() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerTransparent: true,
+        headerTransparent: Platform.OS == "ios" ? true : false,
         headerBlurEffect: "prominent",
+        headerLargeStyle: {
+          backgroundColor: "#F8F7F8",
+        },
+        headerStyle: {
+          backgroundColor: Platform.OS == "android" && "#F8F7F8",
+        },
+        headerShadowVisible: false,
       }}
     >
       <Stack.Screen
