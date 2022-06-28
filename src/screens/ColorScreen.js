@@ -34,6 +34,7 @@ export default ProfileScreen = (props) => {
                 width: "100%",
                 height: 200,
                 backgroundColor: "white",
+                backgroundColor: props?.route?.params?.bgColor || "white",
                 marginBottom: 20,
                 padding: 20,
                 borderRadius: 10,
@@ -46,6 +47,7 @@ export default ProfileScreen = (props) => {
                 textTransform: "uppercase",
                 fontWeight: "bold",
                 color: props?.route?.params?.bgColor || "black",
+                color: "white",
               }}
             >
               {item}

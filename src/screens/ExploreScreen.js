@@ -4,7 +4,7 @@ import React from "react";
 export default function ExploreScreen() {
   return (
     <View>
-      <Text>Explore</Text>
+      <Text></Text>
     </View>
   );
 }
