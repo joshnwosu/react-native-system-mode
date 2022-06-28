@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "../screens/HomeScreen";
-import { Text, TouchableOpacity } from "react-native";
+import { Platform, Text, TouchableOpacity } from "react-native";
 import DetailsScreen from "../screens/DetailsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import ColorScreen from "../screens/ColorScreen";
@@ -12,11 +12,15 @@ export default function HomeNavigator() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerTransparent: true,
+        headerTransparent: Platform.OS == "ios" ? true : false,
         headerBlurEffect: "prominent",
-        headerStyle: {
-          backgroundColor: "rgba(255,255,255,.5)",
+        headerLargeStyle: {
+          backgroundColor: "#F8F7F8",
         },
+        headerStyle: {
+          backgroundColor: Platform.OS == "android" && "#F8F7F8",
+        },
+        headerShadowVisible: false,
       }}
     >
       <Stack.Screen
@@ -26,7 +30,7 @@ export default function HomeNavigator() {
           title: "Home",
           headerLargeTitle: true,
           headerSearchBarOptions: {
-            placeholder: "Github search",
+            placeholder: "Search Github",
           },
           headerRight: () => (
             <TouchableOpacity onPress={() => alert("This is a button!")}>
