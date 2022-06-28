@@ -11,23 +11,21 @@ export default ProfileScreen = (props) => {
         paddingHorizontal: 10,
       }}
     >
-      <Text>Profile Screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => props.navigation.navigate("DetailsScreen")}
-      />
-
       <View
         style={[
           styles.shadowProp,
           {
             width: "100%",
             height: 300,
-            backgroundColor: "white",
+            backgroundColor: "#ED5B92",
             marginBottom: 10,
             borderRadius: 10,
           },
         ]}
+      />
+      <Button
+        title="Go to Details"
+        onPress={() => props.navigation.navigate("DetailsScreen")}
       />
     </ScrollView>
   );
