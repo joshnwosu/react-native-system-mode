@@ -151,9 +151,11 @@ export default HomeScreen = ({ navigation }) => {
       contentInsetAdjustmentBehavior="automatic"
       renderItem={renderItem}
       keyExtractor={(_, index) => index.toString()}
-      contentContainerStyle={{
-        backgroundColor: "rgba(255,255,255,.7)",
-      }}
+      contentContainerStyle={
+        {
+          // backgroundColor: "rgba(255,255,255,.7)",
+        }
+      }
     />
   );
 };
