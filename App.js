@@ -18,9 +18,8 @@ const CustomDefaultTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    // primary: "#ED5B92",
     primary: "#000000",
-    background: "#FFFFFF",
+    background: "#F8F7F8",
     card: "#FFFFFF",
   },
 };
@@ -30,6 +29,7 @@ const CustomDarkTheme = {
   colors: {
     ...DarkTheme.colors,
     primary: "#FFFFFF",
+    // background: "#090909",
     background: "#000000",
     card: "#000000",
   },
