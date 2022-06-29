@@ -1,10 +1,18 @@
-import { View, Text } from "react-native";
-import React from "react";
+import { View, Text, StyleSheet } from "react-native";
+import React, { useContext } from "react";
+import themeContext from "../config/themeContext";
 
 export default function NotificationScreen() {
+  const theme = useContext(themeContext);
   return (
-    <View>
+    <View style={[styles.container]}>
       <Text></Text>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});

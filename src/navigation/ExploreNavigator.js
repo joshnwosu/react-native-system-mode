@@ -10,14 +10,14 @@ export default function ExploreNavigator() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerTransparent: Platform.OS == "ios" ? true : false,
-        headerBlurEffect: "prominent",
-        headerLargeStyle: {
-          backgroundColor: "#F8F7F8",
-        },
-        headerStyle: {
-          backgroundColor: Platform.OS == "android" && "#F8F7F8",
-        },
+        // headerTransparent: Platform.OS == "ios" ? true : false,
+        // headerBlurEffect: "dark",
+        // headerLargeStyle: {
+        //   backgroundColor: "#F8F7F8",
+        // },
+        // headerStyle: {
+        //   backgroundColor: Platform.OS == "android" && "#F8F7F8",
+        // },
         headerShadowVisible: false,
       }}
     >
