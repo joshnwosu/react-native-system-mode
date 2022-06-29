@@ -12,14 +12,14 @@ export default function HomeNavigator() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerTransparent: Platform.OS == "ios" ? true : false,
-        headerBlurEffect: "prominent",
-        headerLargeStyle: {
-          backgroundColor: "#F8F7F8",
-        },
-        headerStyle: {
-          backgroundColor: Platform.OS == "android" && "#F8F7F8",
-        },
+        // headerTransparent: Platform.OS == "ios" ? true : false,
+        // headerBlurEffect: "dark",
+        // headerLargeStyle: {
+        //   backgroundColor: "#F8F7F8",
+        // },
+        // headerStyle: {
+        //   backgroundColor: Platform.OS == "android" && "#F8F7F8",
+        // },
         headerShadowVisible: false,
       }}
     >
@@ -39,14 +39,25 @@ export default function HomeNavigator() {
           ),
         }}
       />
+      {/* <Stack.Group
+        screenOptions={{
+          presentation: "modal",
+        }}
+      > */}
       <Stack.Screen
         name="ColorScreen"
         component={ColorScreen}
         options={({ route }) => ({
           title: route.params.bgColor,
-          headerLargeTitle: true,
+          // headerLargeTitle: true,
+          presentation: "modal",
+          // headerShown: false,
+          // headerStyle: {
+          //   backgroundColor: "white",
+          // },
         })}
       />
+      {/* </Stack.Group> */}
     </Stack.Navigator>
   );
 }
