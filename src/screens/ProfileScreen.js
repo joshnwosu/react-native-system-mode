@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, ScrollView, StyleSheet, Text, View } from "react-native";
+import themeContext from "../config/themeContext";
 
 export default ProfileScreen = (props) => {
+  const theme = useContext(themeContext);
   return (
     <ScrollView
       contentInsetAdjustmentBehavior="automatic"
