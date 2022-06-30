@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { useCallback, useEffect, useState } from "react";
-import { Appearance } from "react-native";
+import { Appearance, useColorScheme } from "react-native";
 
 import {
   NavigationContainer,
@@ -13,6 +13,8 @@ import { EventRegister } from "react-native-event-listeners";
 
 import themeContext from "./src/config/themeContext";
 import theme from "./src/config/theme";
+
+import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 
 const CustomDefaultTheme = {
   ...DefaultTheme,
@@ -35,22 +37,49 @@ const CustomDarkTheme = {
   },
 };
 
-export default function App() {
+const App = () => {
   const [mode, setMode] = useState(false);
-  // const [theme, setTheme] = useState(Appearance.getColorScheme());
-  // Appearance.addChangeListener((scheme) => {
-  //   setTheme(scheme.colorScheme);
-  // });
+  const [systemMode, setSystemMode] = useState(Appearance.getColorScheme());
+  const colorScheme = useColorScheme();
+
+  Appearance.addChangeListener((scheme) => {
+    setSystemMode(scheme);
+    console.log("The scheme: ", scheme.colorScheme);
+    console.log(colorScheme);
+  });
 
   // useEffect(() => {
-  //   console.log("Theme: ", theme);
-  // }, [theme]);
+  //   const subscription = Appearance.addChangeListener(({ colorScheme }) => {
+  //     console.log("The scheme: ", colorScheme);
+  //   });
+
+  //   return () => subscription.remove();
+  // }, []);
+
+  // useEffect(() => {
+  //   console.log(colorScheme);
+  // }, [colorScheme]);
 
   useEffect(() => {
     let eventListener = EventRegister.addEventListener(
       "changeTheme",
       (data) => {
         setMode(data);
+        console.log("Data: ", data);
+      }
+    );
+    return () => {
+      EventRegister.removeEventListener(eventListener);
+    };
+  }, []);
+
+  useEffect(() => {
+    let eventListener = EventRegister.addEventListener(
+      "useSystemTheme",
+      (data) => {
+        setSystemMode(data);
+        console.log("System Data: ", data);
+        console.log("The color scheme: ", colorScheme);
       }
     );
     return () => {
@@ -60,14 +89,18 @@ export default function App() {
 
   return (
     <>
-      <themeContext.Provider value={mode == true ? theme.dark : theme.light}>
-        <StatusBar style={mode == true ? "light" : "dark"} />
-        <NavigationContainer
-          theme={mode == true ? CustomDarkTheme : CustomDefaultTheme}
-        >
-          <AppNavigator />
-        </NavigationContainer>
-      </themeContext.Provider>
+      <ActionSheetProvider>
+        <themeContext.Provider value={mode == true ? theme.dark : theme.light}>
+          <StatusBar style={mode == true ? "light" : "dark"} />
+          <NavigationContainer
+            theme={mode == true ? CustomDarkTheme : CustomDefaultTheme}
+          >
+            <AppNavigator />
+          </NavigationContainer>
+        </themeContext.Provider>
+      </ActionSheetProvider>
     </>
   );
-}
+};
+
+export default App;

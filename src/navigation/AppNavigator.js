@@ -45,11 +45,11 @@ const AppNavigator = () => {
           if (route?.name == "Home") {
             iconName = focused ? "home" : "home";
           } else if (route?.name == "Notifications") {
-            iconName = focused ? "bell-fill" : "bell";
+            iconName = focused ? "bell" : "bell";
           } else if (route?.name == "Explore") {
-            iconName = focused ? "telescope-fill" : "telescope";
+            iconName = focused ? "telescope" : "telescope";
           } else if (route?.name == "Profile") {
-            iconName = focused ? "person-fill" : "person";
+            iconName = focused ? "person" : "person";
           } else if (route?.name == "Settings") {
             iconName = focused ? "gear" : "gear";
           }
