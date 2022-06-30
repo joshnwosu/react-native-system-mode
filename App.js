@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { useCallback, useEffect, useState } from "react";
-import { Appearance, useColorScheme } from "react-native";
+import { useColorScheme } from "react-native";
 
 import {
   NavigationContainer,
@@ -39,33 +39,16 @@ const CustomDarkTheme = {
 
 const App = () => {
   const [mode, setMode] = useState(false);
-  const [systemMode, setSystemMode] = useState(Appearance.getColorScheme());
+  const [darkMode, setDarkMode] = useState(false);
+  const [systemMode, setSystemMode] = useState(false);
+
   const colorScheme = useColorScheme();
-
-  Appearance.addChangeListener((scheme) => {
-    setSystemMode(scheme);
-    console.log("The scheme: ", scheme.colorScheme);
-    console.log(colorScheme);
-  });
-
-  // useEffect(() => {
-  //   const subscription = Appearance.addChangeListener(({ colorScheme }) => {
-  //     console.log("The scheme: ", colorScheme);
-  //   });
-
-  //   return () => subscription.remove();
-  // }, []);
-
-  // useEffect(() => {
-  //   console.log(colorScheme);
-  // }, [colorScheme]);
 
   useEffect(() => {
     let eventListener = EventRegister.addEventListener(
       "changeTheme",
       (data) => {
-        setMode(data);
-        console.log("Data: ", data);
+        setDarkMode(data);
       }
     );
     return () => {
@@ -78,8 +61,6 @@ const App = () => {
       "useSystemTheme",
       (data) => {
         setSystemMode(data);
-        console.log("System Data: ", data);
-        console.log("The color scheme: ", colorScheme);
       }
     );
     return () => {
@@ -87,18 +68,32 @@ const App = () => {
     };
   }, []);
 
+  const themeHandler = () => {
+    if (systemMode) {
+      if (colorScheme == "dark") setMode(true);
+      else if (colorScheme == "light") setMode(false);
+    } else {
+      if (darkMode) setMode(true);
+      else setMode(false);
+    }
+  };
+
+  useEffect(() => {
+    themeHandler();
+  }, [colorScheme, systemMode, darkMode]);
+
   return (
     <>
-      <ActionSheetProvider>
-        <themeContext.Provider value={mode == true ? theme.dark : theme.light}>
-          <StatusBar style={mode == true ? "light" : "dark"} />
+      <themeContext.Provider value={mode == true ? theme.dark : theme.light}>
+        <StatusBar style={mode == true ? "light" : "dark"} />
+        <ActionSheetProvider>
           <NavigationContainer
             theme={mode == true ? CustomDarkTheme : CustomDefaultTheme}
           >
             <AppNavigator />
           </NavigationContainer>
-        </themeContext.Provider>
-      </ActionSheetProvider>
+        </ActionSheetProvider>
+      </themeContext.Provider>
     </>
   );
 };
