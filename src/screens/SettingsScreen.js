@@ -107,7 +107,7 @@ export default function SettingsScreen() {
                 <Ionicons name="sunny-outline" color={theme.color} size={23} />
               </View>
               <Text style={[styles.itemText, { color: theme.color }]}>
-                Light Theme
+                Light theme
               </Text>
             </View>
 
@@ -122,7 +122,7 @@ export default function SettingsScreen() {
                 <Ionicons name="moon-outline" color={theme.color} size={23} />
               </View>
               <Text style={[styles.itemText, { color: theme.color }]}>
-                Dark Theme
+                Dark theme
               </Text>
             </View>
             <View style={[styles.itemIcon]}>
@@ -192,7 +192,11 @@ export default function SettingsScreen() {
           <View style={[styles.item]}>
             <View style={[styles.itemFlex]}>
               <View style={[styles.itemIcon]}>
-                <Ionicons name="help-outline" color={theme.color} size={23} />
+                <Ionicons
+                  name="ios-help-circle-outline"
+                  color={theme.color}
+                  size={23}
+                />
               </View>
               <Text style={[styles.itemText, { color: theme.color }]}>
                 Help center
