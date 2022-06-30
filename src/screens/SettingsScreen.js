@@ -8,12 +8,12 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { EventRegister } from "react-native-event-listeners";
 import themeContext from "../config/themeContext";
 import { Ionicons } from "@expo/vector-icons";
 import { useActionSheet } from "@expo/react-native-action-sheet";
-import Accordion from "../components/AccordionList/Accordion";
+import Accordion from "../components/Accordion/Accordion";
 
 export default function SettingsScreen() {
   const { showActionSheetWithOptions } = useActionSheet();
@@ -25,10 +25,10 @@ export default function SettingsScreen() {
   const showActionSheet = () => {
     showActionSheetWithOptions(
       {
-        options: ["Generate number", "Reset", "Cancel"],
+        options: ["Na wa for you o 😣", "Reset", "Cancel"],
         destructiveButtonIndex: 1,
         cancelButtonIndex: 2,
-        // userInterfaceStyle: "dark",
+        userInterfaceStyle: "automatic",
       },
       (buttonIndex) => {
         if (buttonIndex === 0) {
@@ -42,8 +42,8 @@ export default function SettingsScreen() {
     );
   };
 
-  const lightTheme = ["Alien", "Mint", "Trees"];
-  const darkTheme = ["Night", "Midnight (AMOLED)"];
+  const lightTheme = ["Default", "Ice", "Fire", "Trees", "Pony"];
+  const darkTheme = ["Night", "AMOLED"];
 
   const [selectedDarkTheme, setSelectedDarkTheme] = useState(darkTheme[0]);
   const [selectedLightTheme, setSelectedLightTheme] = useState(lightTheme[0]);
@@ -51,25 +51,29 @@ export default function SettingsScreen() {
   return (
     <ScrollView style={[styles.container]}>
       <View style={[styles.themeSettings]}>
-        <View style={[styles.headerSettings]}>
-          <Text style={[styles.headerSettingsText, { color: theme.color }]}>
+        <View
+          style={[styles.headerSettings, { backgroundColor: theme.header }]}
+        >
+          <Text style={[styles.headerSettingsText, { color: theme.label }]}>
             APPEARNCE
           </Text>
         </View>
 
-        <View
-          style={[styles.itemContainer, { backgroundColor: theme.background }]}
-        >
+        <View style={[styles.itemContainer, { backgroundColor: theme.card }]}>
           <View style={[styles.item]}>
             <View style={[styles.itemFlex]}>
               <View style={[styles.itemIcon]}>
                 <Ionicons
                   name="settings-outline"
-                  color={theme.color}
+                  color={theme.label}
                   size={23}
                 />
               </View>
-              <Text style={[styles.itemText, { color: theme.color }]}>
+              <Text
+                ellipsizeMode="tail"
+                numberOfLines={1}
+                style={[styles.itemText, { color: theme.color, flex: 1 }]}
+              >
                 Automatic (follow {Platform.OS == "ios" ? "iOS" : "Android"}{" "}
                 setting)
               </Text>
@@ -87,7 +91,7 @@ export default function SettingsScreen() {
             <View style={[styles.item]}>
               <View style={[styles.itemFlex]}>
                 <View style={[styles.itemIcon]}>
-                  <Ionicons name="moon-outline" color={theme.color} size={23} />
+                  <Ionicons name="moon-outline" color={theme.label} size={23} />
                 </View>
                 <Text style={[styles.itemText, { color: theme.color }]}>
                   Dark Mode
@@ -105,13 +109,12 @@ export default function SettingsScreen() {
 
           <Accordion
             headeStyle={styles.item}
-            title={"Light theme"}
             header={() => (
               <View style={[styles.itemFlex]}>
                 <View style={[styles.itemIcon]}>
                   <Ionicons
                     name="sunny-outline"
-                    color={theme.color}
+                    color={theme.label}
                     size={23}
                   />
                 </View>
@@ -129,10 +132,11 @@ export default function SettingsScreen() {
                     style={[
                       styles.itemText,
                       {
-                        color: theme.color,
+                        color: theme.label,
                         fontWeight: "400",
+                        fontSize: 14,
                         paddingRight: 10,
-                        opacity: 0.6,
+                        opacity: 1,
                       },
                     ]}
                   >
@@ -148,6 +152,7 @@ export default function SettingsScreen() {
                   onPress={() => {
                     closeAccordion();
                     setSelectedLightTheme(item);
+                    EventRegister.emit("accentColor", item.toLowerCase());
                   }}
                   key={index}
                   style={{
@@ -164,8 +169,9 @@ export default function SettingsScreen() {
                           ? "radio-button-on-outline"
                           : "radio-button-off-outline"
                       }
-                      color={theme.color}
+                      color={theme.label}
                       size={23}
+                      style={{ opacity: 1 }}
                     />
                   </View>
                   <Text
@@ -189,7 +195,7 @@ export default function SettingsScreen() {
             header={() => (
               <View style={[styles.itemFlex]}>
                 <View style={[styles.itemIcon]}>
-                  <Ionicons name="moon-outline" color={theme.color} size={23} />
+                  <Ionicons name="moon-outline" color={theme.label} size={23} />
                 </View>
                 <View
                   style={{
@@ -205,10 +211,11 @@ export default function SettingsScreen() {
                     style={[
                       styles.itemText,
                       {
-                        color: theme.color,
-                        fontWeight: "300",
+                        color: theme.label,
+                        fontWeight: "400",
+                        fontSize: 14,
                         paddingRight: 10,
-                        opacity: 0.6,
+                        opacity: 1,
                       },
                     ]}
                   >
@@ -224,6 +231,7 @@ export default function SettingsScreen() {
                   onPress={() => {
                     setSelectedDarkTheme(item);
                     closeAccordion();
+                    EventRegister.emit("darkAccentColor", item.toLowerCase());
                   }}
                   key={index}
                   style={{
@@ -240,8 +248,9 @@ export default function SettingsScreen() {
                           ? "radio-button-on-outline"
                           : "radio-button-off-outline"
                       }
-                      color={theme.color}
+                      color={theme.label}
                       size={23}
+                      style={{ opacity: 1 }}
                     />
                   </View>
                   <Text
@@ -263,7 +272,7 @@ export default function SettingsScreen() {
           {/* <TouchableOpacity onPress={showActionSheet} style={[styles.item]}>
             <View style={[styles.itemFlex]}>
               <View style={[styles.itemIcon]}>
-                <Ionicons name="sunny-outline" color={theme.color} size={23} />
+                <Ionicons name="sunny-outline" color={theme.label} size={23} />
               </View>
               <Text style={[styles.itemText, { color: theme.color }]}>
                 Light theme
@@ -271,42 +280,42 @@ export default function SettingsScreen() {
             </View>
 
             <View style={[styles.itemIcon]}>
-              <Ionicons name="chevron-down" color={theme.color} size={23} />
+              <Ionicons name="chevron-down" color={theme.label} size={23} />
             </View>
           </TouchableOpacity>
 
           <TouchableOpacity onPress={showActionSheet} style={[styles.item]}>
             <View style={[styles.itemFlex]}>
               <View style={[styles.itemIcon]}>
-                <Ionicons name="moon-outline" color={theme.color} size={23} />
+                <Ionicons name="moon-outline" color={theme.label} size={23} />
               </View>
               <Text style={[styles.itemText, { color: theme.color }]}>
                 Dark theme
               </Text>
             </View>
             <View style={[styles.itemIcon]}>
-              <Ionicons name="chevron-down" color={theme.color} size={23} />
+              <Ionicons name="chevron-down" color={theme.label} size={23} />
             </View>
           </TouchableOpacity> */}
         </View>
       </View>
 
       <View style={[styles.themeSettings]}>
-        <View style={[styles.headerSettings]}>
-          <Text style={[styles.headerSettingsText, { color: theme.color }]}>
+        <View
+          style={[styles.headerSettings, { backgroundColor: theme.header }]}
+        >
+          <Text style={[styles.headerSettingsText, { color: theme.label }]}>
             ABOUT
           </Text>
         </View>
 
-        <View
-          style={[styles.itemContainer, { backgroundColor: theme.background }]}
-        >
+        <View style={[styles.itemContainer, { backgroundColor: theme.card }]}>
           <View style={[styles.item]}>
             <View style={[styles.itemFlex]}>
               <View style={[styles.itemIcon]}>
                 <Ionicons
                   name="document-outline"
-                  color={theme.color}
+                  color={theme.label}
                   size={23}
                 />
               </View>
@@ -318,7 +327,7 @@ export default function SettingsScreen() {
           <View style={[styles.item]}>
             <View style={[styles.itemFlex]}>
               <View style={[styles.itemIcon]}>
-                <Ionicons name="key-outline" color={theme.color} size={23} />
+                <Ionicons name="key-outline" color={theme.label} size={23} />
               </View>
               <Text style={[styles.itemText, { color: theme.color }]}>
                 Privacy policy
@@ -328,7 +337,7 @@ export default function SettingsScreen() {
           <View style={[styles.item]}>
             <View style={[styles.itemFlex]}>
               <View style={[styles.itemIcon]}>
-                <Ionicons name="person-outline" color={theme.color} size={23} />
+                <Ionicons name="person-outline" color={theme.label} size={23} />
               </View>
               <Text style={[styles.itemText, { color: theme.color }]}>
                 User agreement
@@ -339,21 +348,21 @@ export default function SettingsScreen() {
       </View>
 
       <View style={[styles.themeSettings]}>
-        <View style={[styles.headerSettings]}>
-          <Text style={[styles.headerSettingsText, { color: theme.color }]}>
+        <View
+          style={[styles.headerSettings, { backgroundColor: theme.header }]}
+        >
+          <Text style={[styles.headerSettingsText, { color: theme.label }]}>
             SUPPORT
           </Text>
         </View>
 
-        <View
-          style={[styles.itemContainer, { backgroundColor: theme.background }]}
-        >
+        <View style={[styles.itemContainer, { backgroundColor: theme.card }]}>
           <View style={[styles.item]}>
             <View style={[styles.itemFlex]}>
               <View style={[styles.itemIcon]}>
                 <Ionicons
                   name="ios-help-circle-outline"
-                  color={theme.color}
+                  color={theme.label}
                   size={23}
                 />
               </View>
@@ -367,7 +376,7 @@ export default function SettingsScreen() {
               <View style={[styles.itemIcon]}>
                 <Ionicons
                   name="mail-open-outline"
-                  color={theme.color}
+                  color={theme.label}
                   size={23}
                 />
               </View>
@@ -376,12 +385,12 @@ export default function SettingsScreen() {
               </Text>
             </View>
           </View>
-          <View style={[styles.item]}>
+          <TouchableOpacity style={[styles.item]} onPress={showActionSheet}>
             <View style={[styles.itemFlex]}>
               <View style={[styles.itemIcon]}>
                 <Ionicons
                   name="remove-circle-outline"
-                  color={theme.color}
+                  color={theme.label}
                   size={23}
                 />
               </View>
@@ -389,7 +398,7 @@ export default function SettingsScreen() {
                 Delete account
               </Text>
             </View>
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
     </ScrollView>
@@ -399,6 +408,7 @@ export default function SettingsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    // borderWidth: 1,
     // justifyContent: "center",
     // alignItems: "center",
     // padding: 20,
@@ -410,7 +420,7 @@ const styles = StyleSheet.create({
   headerSettingsText: {
     fontWeight: "700",
     fontSize: 12,
-    opacity: 0.5,
+    opacity: 1,
     textTransform: "uppercase",
   },
   itemContainer: {
@@ -431,17 +441,13 @@ const styles = StyleSheet.create({
   },
   itemIcon: {
     marginRight: 10,
+    opacity: 1,
   },
   itemText: {
-    fontSize: 16,
-    fontWeight: "700",
+    fontSize: 17,
+    fontWeight: "600",
     marginLeft: 10,
   },
 
-  contentStyle: {
-    // padding: 20,
-    // paddingLeft: 30,
-    // borderTopColor: "#F8F7F8",
-    // borderTopWidth: 1,
-  },
+  contentStyle: {},
 });
