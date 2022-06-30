@@ -1,15 +1,10 @@
-import React, { useState, useRef } from "react";
-import {
-  View,
-  Text,
-  TouchableWithoutFeedback,
-  StyleSheet,
-  Animated,
-  Easing,
-} from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
+import React, { useState, useRef, useContext } from "react";
+import { View, TouchableWithoutFeedback, Animated, Easing } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import themeContext from "../../config/themeContext";
 
-const AccordionListItem = ({ title, children }) => {
+const Accordion = ({ header, headeStyle, contentStyle, children, content }) => {
+  const theme = useContext(themeContext);
   const [open, setOpen] = useState(false);
   const animatedController = useRef(new Animated.Value(0)).current;
   const [bodySectionHeight, setBodySectionHeight] = useState(0);
@@ -46,48 +41,33 @@ const AccordionListItem = ({ title, children }) => {
   return (
     <>
       <TouchableWithoutFeedback onPress={() => toggleListItem()}>
-        <View style={styles.titleContainer}>
-          <Text>{title}</Text>
-          <Animated.View style={{ transform: [{ rotateZ: arrowAngle }] }}>
-            <MaterialIcons name="keyboard-arrow-down" size={20} color="black" />
+        <View style={{ ...headeStyle }}>
+          {header()}
+          <Animated.View
+            style={{ marginRight: 10, transform: [{ rotateZ: arrowAngle }] }}
+          >
+            <Ionicons name="chevron-down" color={theme.color} size={23} />
           </Animated.View>
         </View>
       </TouchableWithoutFeedback>
-      <Animated.View style={[styles.bodyBackground, { height: bodyHeight }]}>
+      <Animated.View style={{ height: bodyHeight, overflow: "hidden" }}>
         <View
-          style={styles.bodyContainer}
+          style={{
+            position: "absolute",
+            bottom: 0,
+            padding: 0,
+            width: "100%",
+            backgroundColor: theme.card,
+            ...contentStyle,
+          }}
           onLayout={(event) =>
             setBodySectionHeight(event.nativeEvent.layout.height)
           }
         >
-          {children}
+          {content(toggleListItem)}
         </View>
       </Animated.View>
     </>
   );
 };
-export default AccordionListItem;
-
-const styles = StyleSheet.create({
-  bodyBackground: {
-    backgroundColor: "#EFEFEF",
-    overflow: "hidden",
-  },
-  titleContainer: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: 10,
-    paddingLeft: 15,
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
-    borderColor: "#EFEFEF",
-  },
-  bodyContainer: {
-    padding: 10,
-    paddingLeft: 15,
-    position: "absolute",
-    bottom: 0,
-  },
-});
+export default Accordion;
