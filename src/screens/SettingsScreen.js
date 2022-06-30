@@ -41,9 +41,6 @@ export default function SettingsScreen() {
     );
   };
 
-  // const RadioButton = () => {
-  //   return
-  // }
   return (
     <ScrollView style={[styles.container]}>
       <View style={[styles.themeSettings]}>
