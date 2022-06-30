@@ -6,6 +6,7 @@ import {
   Platform,
   //   ActionSheetIOS,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import React, { useState, useContext } from "react";
 import { EventRegister } from "react-native-event-listeners";
@@ -39,8 +40,12 @@ export default function SettingsScreen() {
       }
     );
   };
+
+  // const RadioButton = () => {
+  //   return
+  // }
   return (
-    <View style={[styles.container]}>
+    <ScrollView style={[styles.container]}>
       <View style={[styles.themeSettings]}>
         <View style={[styles.headerSettings]}>
           <Text style={[styles.headerSettingsText, { color: theme.color }]}>
@@ -74,27 +79,27 @@ export default function SettingsScreen() {
             />
           </View>
 
-          <View style={[styles.item]}>
-            <View style={[styles.itemFlex]}>
-              <View style={[styles.itemIcon]}>
-                <Ionicons
-                  name="color-palette-outline"
-                  color={theme.color}
-                  size={23}
-                />
+          {systemMode == false && (
+            <View style={[styles.item]}>
+              <View style={[styles.itemFlex]}>
+                <View style={[styles.itemIcon]}>
+                  <Ionicons name="moon-outline" color={theme.color} size={23} />
+                </View>
+                <Text style={[styles.itemText, { color: theme.color }]}>
+                  Dark Mode
+                </Text>
               </View>
-              <Text style={[styles.itemText, { color: theme.color }]}>
-                Toggle Light/Dark Mode
-              </Text>
+              <Switch
+                value={mode}
+                onValueChange={(value) => {
+                  setMode(value);
+                  EventRegister.emit("changeTheme", value);
+                }}
+              />
             </View>
-            <Switch
-              value={mode}
-              onValueChange={(value) => {
-                setMode(value);
-                EventRegister.emit("changeTheme", value);
-              }}
-            />
-          </View>
+          )}
+
+          {/* TODO: add more colors to Dark and Light Theme */}
 
           <TouchableOpacity onPress={showActionSheet} style={[styles.item]}>
             <View style={[styles.itemFlex]}>
@@ -224,7 +229,7 @@ export default function SettingsScreen() {
           </View>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
