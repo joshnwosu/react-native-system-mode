@@ -13,6 +13,7 @@ import { EventRegister } from "react-native-event-listeners";
 import themeContext from "../config/themeContext";
 import { Ionicons } from "@expo/vector-icons";
 import { useActionSheet } from "@expo/react-native-action-sheet";
+import Accordion from "../components/AccordionList/Accordion";
 
 export default function SettingsScreen() {
   const { showActionSheetWithOptions } = useActionSheet();
@@ -40,6 +41,12 @@ export default function SettingsScreen() {
       }
     );
   };
+
+  const lightTheme = ["Alien", "Mint", "Trees"];
+  const darkTheme = ["Night", "Midnight (AMOLED)"];
+
+  const [selectedDarkTheme, setSelectedDarkTheme] = useState(darkTheme[0]);
+  const [selectedLightTheme, setSelectedLightTheme] = useState(lightTheme[0]);
 
   return (
     <ScrollView style={[styles.container]}>
@@ -96,9 +103,164 @@ export default function SettingsScreen() {
             </View>
           )}
 
-          {/* TODO: add more colors to Dark and Light Theme */}
+          <Accordion
+            headeStyle={styles.item}
+            title={"Light theme"}
+            header={() => (
+              <View style={[styles.itemFlex]}>
+                <View style={[styles.itemIcon]}>
+                  <Ionicons
+                    name="sunny-outline"
+                    color={theme.color}
+                    size={23}
+                  />
+                </View>
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Text style={[styles.itemText, { color: theme.color }]}>
+                    Light theme
+                  </Text>
+                  <Text
+                    style={[
+                      styles.itemText,
+                      {
+                        color: theme.color,
+                        fontWeight: "400",
+                        paddingRight: 10,
+                        opacity: 0.6,
+                      },
+                    ]}
+                  >
+                    {selectedLightTheme}
+                  </Text>
+                </View>
+              </View>
+            )}
+            contentStyle={styles.contentStyle}
+            content={(closeAccordion) =>
+              lightTheme?.map((item, index) => (
+                <TouchableOpacity
+                  onPress={() => {
+                    closeAccordion();
+                    setSelectedLightTheme(item);
+                  }}
+                  key={index}
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    paddingHorizontal: 40,
+                    padding: 10,
+                  }}
+                >
+                  <View>
+                    <Ionicons
+                      name={
+                        selectedLightTheme == item
+                          ? "radio-button-on-outline"
+                          : "radio-button-off-outline"
+                      }
+                      color={theme.color}
+                      size={23}
+                    />
+                  </View>
+                  <Text
+                    style={{
+                      color: theme.color,
+                      fontSize: 20,
+                      fontSize: 15,
+                      fontWeight: "400",
+                      marginLeft: 10,
+                    }}
+                  >
+                    {item}
+                  </Text>
+                </TouchableOpacity>
+              ))
+            }
+          />
 
-          <TouchableOpacity onPress={showActionSheet} style={[styles.item]}>
+          <Accordion
+            headeStyle={styles.item}
+            header={() => (
+              <View style={[styles.itemFlex]}>
+                <View style={[styles.itemIcon]}>
+                  <Ionicons name="moon-outline" color={theme.color} size={23} />
+                </View>
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Text style={[styles.itemText, { color: theme.color }]}>
+                    Dark theme
+                  </Text>
+                  <Text
+                    style={[
+                      styles.itemText,
+                      {
+                        color: theme.color,
+                        fontWeight: "300",
+                        paddingRight: 10,
+                        opacity: 0.6,
+                      },
+                    ]}
+                  >
+                    {selectedDarkTheme}
+                  </Text>
+                </View>
+              </View>
+            )}
+            contentStyle={styles.contentStyle}
+            content={(closeAccordion) =>
+              darkTheme?.map((item, index) => (
+                <TouchableOpacity
+                  onPress={() => {
+                    setSelectedDarkTheme(item);
+                    closeAccordion();
+                  }}
+                  key={index}
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    paddingHorizontal: 40,
+                    padding: 10,
+                  }}
+                >
+                  <View>
+                    <Ionicons
+                      name={
+                        selectedDarkTheme == item
+                          ? "radio-button-on-outline"
+                          : "radio-button-off-outline"
+                      }
+                      color={theme.color}
+                      size={23}
+                    />
+                  </View>
+                  <Text
+                    style={{
+                      color: theme.color,
+                      fontSize: 20,
+                      fontSize: 15,
+                      fontWeight: "400",
+                      marginLeft: 10,
+                    }}
+                  >
+                    {item}
+                  </Text>
+                </TouchableOpacity>
+              ))
+            }
+          />
+
+          {/* <TouchableOpacity onPress={showActionSheet} style={[styles.item]}>
             <View style={[styles.itemFlex]}>
               <View style={[styles.itemIcon]}>
                 <Ionicons name="sunny-outline" color={theme.color} size={23} />
@@ -125,7 +287,7 @@ export default function SettingsScreen() {
             <View style={[styles.itemIcon]}>
               <Ionicons name="chevron-down" color={theme.color} size={23} />
             </View>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
 
@@ -265,13 +427,21 @@ const styles = StyleSheet.create({
   itemFlex: {
     flexDirection: "row",
     alignItems: "center",
+    flex: 1,
   },
   itemIcon: {
     marginRight: 10,
   },
   itemText: {
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: "700",
     marginLeft: 10,
+  },
+
+  contentStyle: {
+    // padding: 20,
+    // paddingLeft: 30,
+    // borderTopColor: "#F8F7F8",
+    // borderTopWidth: 1,
   },
 });
