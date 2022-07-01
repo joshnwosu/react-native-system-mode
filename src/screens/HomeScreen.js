@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { useScrollToTop } from "@react-navigation/native";
 
 const DATA = [
@@ -135,13 +135,13 @@ const Item = ({ item, navigation }) => (
 export default HomeScreen = ({ navigation }) => {
   const ref = React.useRef(null);
 
-  // useScrollToTop(ref);
+  useScrollToTop(ref);
 
-  useScrollToTop(
-    React.useRef({
-      scrollToTop: () => ref.current?.scrollToOffset({ offset: 100 }),
-    })
-  );
+  // useScrollToTop(
+  //   React.useRef({
+  //     scrollToTop: () => ref.current?.scrollToOffset({ offset: 100 }),
+  //   })
+  // );
 
   const renderItem = ({ item }) => <Item item={item} navigation={navigation} />;
   return (
