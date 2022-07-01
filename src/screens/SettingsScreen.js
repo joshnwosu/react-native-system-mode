@@ -28,7 +28,7 @@ export default function SettingsScreen() {
         options: ["Na wa for you o 😣", "Reset", "Cancel"],
         destructiveButtonIndex: 1,
         cancelButtonIndex: 2,
-        userInterfaceStyle: "automatic",
+        userInterfaceStyle: "dark",
       },
       (buttonIndex) => {
         if (buttonIndex === 0) {
@@ -43,7 +43,7 @@ export default function SettingsScreen() {
   };
 
   const lightTheme = ["Default", "Ice", "Fire", "Trees", "Pony"];
-  const darkTheme = ["Night", "AMOLED"];
+  const darkTheme = ["Default", "Night", "AMOLED"];
 
   const [selectedDarkTheme, setSelectedDarkTheme] = useState(darkTheme[0]);
   const [selectedLightTheme, setSelectedLightTheme] = useState(lightTheme[0]);
@@ -84,6 +84,7 @@ export default function SettingsScreen() {
                 setSystemMode(value);
                 EventRegister.emit("useSystemTheme", value);
               }}
+              ios_backgroundColor={theme.label}
             />
           </View>
 
@@ -103,6 +104,7 @@ export default function SettingsScreen() {
                   setMode(value);
                   EventRegister.emit("changeTheme", value);
                 }}
+                ios_backgroundColor={theme.label}
               />
             </View>
           )}
@@ -268,35 +270,6 @@ export default function SettingsScreen() {
               ))
             }
           />
-
-          {/* <TouchableOpacity onPress={showActionSheet} style={[styles.item]}>
-            <View style={[styles.itemFlex]}>
-              <View style={[styles.itemIcon]}>
-                <Ionicons name="sunny-outline" color={theme.label} size={23} />
-              </View>
-              <Text style={[styles.itemText, { color: theme.color }]}>
-                Light theme
-              </Text>
-            </View>
-
-            <View style={[styles.itemIcon]}>
-              <Ionicons name="chevron-down" color={theme.label} size={23} />
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={showActionSheet} style={[styles.item]}>
-            <View style={[styles.itemFlex]}>
-              <View style={[styles.itemIcon]}>
-                <Ionicons name="moon-outline" color={theme.label} size={23} />
-              </View>
-              <Text style={[styles.itemText, { color: theme.color }]}>
-                Dark theme
-              </Text>
-            </View>
-            <View style={[styles.itemIcon]}>
-              <Ionicons name="chevron-down" color={theme.label} size={23} />
-            </View>
-          </TouchableOpacity> */}
         </View>
       </View>
 
@@ -408,10 +381,6 @@ export default function SettingsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // borderWidth: 1,
-    // justifyContent: "center",
-    // alignItems: "center",
-    // padding: 20,
   },
   headerSettings: {
     paddingVertical: 10,
@@ -444,7 +413,7 @@ const styles = StyleSheet.create({
     opacity: 1,
   },
   itemText: {
-    fontSize: 17,
+    fontSize: 16,
     fontWeight: "600",
     marginLeft: 10,
   },
