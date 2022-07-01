@@ -51,6 +51,13 @@ const theme = {
     header: "#000000",
     card: "#000000",
     label: "#AAAAAA",
+    default: {
+      color: "#DDDDDD",
+      background: "#0E121A",
+      header: "#0E121A",
+      card: "#171C26",
+      label: "#AAAAAA",
+    },
     night: {
       color: "#DDDDDD",
       background: "#000000",
