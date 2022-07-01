@@ -21,7 +21,7 @@ const App = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [systemMode, setSystemMode] = useState(false);
   const [accentColor, setAccentColor] = useState("default");
-  const [darkAccentColor, setDarkAccentColor] = useState("night");
+  const [darkAccentColor, setDarkAccentColor] = useState("default");
 
   const colorScheme = useColorScheme();
 
@@ -29,7 +29,8 @@ const App = () => {
     ...DefaultTheme,
     colors: {
       ...DefaultTheme.colors,
-      primary: "#222222",
+      // primary: "#222222",
+      primary: theme.light[accentColor].label,
       background: theme.light[accentColor].background,
       card: theme.light[accentColor].card,
     },
@@ -39,7 +40,8 @@ const App = () => {
     ...DarkTheme,
     colors: {
       ...DarkTheme.colors,
-      primary: "#EEEEEE",
+      // primary: "#EEEEEE",
+      primary: theme.dark[darkAccentColor].label,
       background: theme.dark[darkAccentColor].background,
       card: theme.dark[darkAccentColor].card,
     },
