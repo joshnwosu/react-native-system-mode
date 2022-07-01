@@ -14,10 +14,13 @@ import DetailsScreen from "../screens/DetailsScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ColorScreen from "../screens/ColorScreen";
 import SettingsNavigator from "./SettingsNavigator";
+import { useContext } from "react";
+import themeContext from "../config/themeContext";
 
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
+  const theme = useContext(themeContext);
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -25,12 +28,14 @@ const AppNavigator = () => {
         tabBarLabelPosition: "below-icon",
         tabBarLabelStyle: {
           fontSize: 12,
-          fontWeight: "bold",
+          fontWeight: "700",
         },
+        tabBarHideOnKeyboard: true,
+        tabBarShowLabel: false,
         // tabBarStyle: {
-        //   // position: "absolute",
-        //   backgroundColor: Platform.OS == "ios" ? "#F8F7F850" : "#F8F7F8",
-        //   borderTopColor: Platform.OS == "ios" ? "#F8F7F850" : "#F8F7F8",
+        //   position: "absolute",
+        //   // backgroundColor: Platform.OS == "ios" ? "#F8F7F850" : "#F8F7F8",
+        //   // borderTopColor: Platform.OS == "ios" ? "#F8F7F850" : "#F8F7F8",
         // },
         // tabBarBackground: () => (
         //   <BlurView
