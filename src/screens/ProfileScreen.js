@@ -29,6 +29,10 @@ export default ProfileScreen = (props) => {
         title="Go to Details"
         onPress={() => props.navigation.navigate("DetailsScreen")}
       />
+      <Button
+        title="Go to Settings"
+        onPress={() => props.navigation.navigate("SettingsScreen2")}
+      />
     </ScrollView>
   );
 };

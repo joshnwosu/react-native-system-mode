@@ -16,33 +16,36 @@ import theme from "./src/config/theme";
 
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 
-const CustomDefaultTheme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: "#000000",
-    background: "#F8F7F8",
-    card: "#FFFFFF",
-  },
-};
-
-const CustomDarkTheme = {
-  ...DarkTheme,
-  colors: {
-    ...DarkTheme.colors,
-    primary: "#FFFFFF",
-    // background: "#090909",
-    background: "#000000",
-    card: "#000000",
-  },
-};
-
 const App = () => {
   const [mode, setMode] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [systemMode, setSystemMode] = useState(false);
+  const [accentColor, setAccentColor] = useState("default");
+  const [darkAccentColor, setDarkAccentColor] = useState("default");
 
   const colorScheme = useColorScheme();
+
+  const CustomDefaultTheme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      // primary: "#222222",
+      primary: theme.light[accentColor].label,
+      background: theme.light[accentColor].background,
+      card: theme.light[accentColor].card,
+    },
+  };
+
+  const CustomDarkTheme = {
+    ...DarkTheme,
+    colors: {
+      ...DarkTheme.colors,
+      primary: "#EEEEEE",
+      // primary: theme.dark[darkAccentColor].label,
+      background: theme.dark[darkAccentColor].background,
+      card: theme.dark[darkAccentColor].card,
+    },
+  };
 
   useEffect(() => {
     let eventListener = EventRegister.addEventListener(
@@ -68,6 +71,30 @@ const App = () => {
     };
   }, []);
 
+  useEffect(() => {
+    let eventListener = EventRegister.addEventListener(
+      "accentColor",
+      (data) => {
+        setAccentColor(data);
+      }
+    );
+    return () => {
+      EventRegister.removeEventListener(eventListener);
+    };
+  }, []);
+
+  useEffect(() => {
+    let eventListener = EventRegister.addEventListener(
+      "darkAccentColor",
+      (data) => {
+        setDarkAccentColor(data);
+      }
+    );
+    return () => {
+      EventRegister.removeEventListener(eventListener);
+    };
+  }, []);
+
   const themeHandler = () => {
     if (systemMode) {
       if (colorScheme == "dark") setMode(true);
@@ -84,7 +111,13 @@ const App = () => {
 
   return (
     <>
-      <themeContext.Provider value={mode == true ? theme.dark : theme.light}>
+      <themeContext.Provider
+        value={
+          mode == true
+            ? theme.dark[darkAccentColor] || theme.dark
+            : theme.light[accentColor] || theme.light
+        }
+      >
         <StatusBar style={mode == true ? "light" : "dark"} />
         <ActionSheetProvider>
           <NavigationContainer

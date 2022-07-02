@@ -5,6 +5,7 @@ import { Platform, Text, TouchableOpacity } from "react-native";
 import NotificationScreen from "../screens/NotificationScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import DetailsScreen from "../screens/DetailsScreen";
+import SettingsScreen from "../screens/SettingsScreen";
 const Stack = createNativeStackNavigator();
 
 export default function ProfileNavigator() {
