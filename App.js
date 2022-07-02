@@ -40,8 +40,8 @@ const App = () => {
     ...DarkTheme,
     colors: {
       ...DarkTheme.colors,
-      // primary: "#EEEEEE",
-      primary: theme.dark[darkAccentColor].label,
+      primary: "#EEEEEE",
+      // primary: theme.dark[darkAccentColor].label,
       background: theme.dark[darkAccentColor].background,
       card: theme.dark[darkAccentColor].card,
     },
