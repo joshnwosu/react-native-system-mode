@@ -31,15 +31,16 @@ const AppNavigator = () => {
           fontWeight: "700",
         },
         tabBarHideOnKeyboard: true,
-        tabBarShowLabel: false,
+        // tabBarShowLabel: false,
         // tabBarStyle: {
+        //   // height: 100,
         //   position: "absolute",
         //   // backgroundColor: Platform.OS == "ios" ? "#F8F7F850" : "#F8F7F8",
         //   // borderTopColor: Platform.OS == "ios" ? "#F8F7F850" : "#F8F7F8",
         // },
         // tabBarBackground: () => (
         //   <BlurView
-        //     tint="light"
+        //     tint="dark"
         //     intensity={100}
         //     style={StyleSheet.absoluteFill}
         //   />
