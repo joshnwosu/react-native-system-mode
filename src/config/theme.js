@@ -8,6 +8,7 @@ const theme = {
     card: "#F8F7F8",
     label: "#999",
     default: {
+      theme: "light",
       color: "#222222",
       card: "#FFFFFF",
       label: "#555555",
@@ -15,6 +16,7 @@ const theme = {
       background: "#F8F7F8",
     },
     ice: {
+      theme: "light",
       color: "#222222",
       header: "#529AF910",
       background: "#529AF910",
@@ -22,6 +24,7 @@ const theme = {
       label: "#529AF9",
     },
     fire: {
+      theme: "light",
       color: "#222222",
       header: "#fffaeb",
       background: "#fffaeb",
@@ -29,6 +32,7 @@ const theme = {
       label: "#f79009",
     },
     trees: {
+      theme: "light",
       color: "#222222",
       header: "#ecfdf3",
       background: "#ecfdf3",
@@ -36,6 +40,7 @@ const theme = {
       label: "#12bf68",
     },
     pony: {
+      theme: "light",
       color: "#030749",
       header: "#fef3f2",
       background: "#fef3f2",
@@ -52,6 +57,7 @@ const theme = {
     card: "#000000",
     label: "#AAAAAA",
     default: {
+      theme: "dark",
       color: "#DDDDDD",
       background: "#0E121A",
       header: "#0E121A",
@@ -59,6 +65,7 @@ const theme = {
       label: "#888888",
     },
     night: {
+      theme: "dark",
       color: "#D7D7D7",
       background: "#000000",
       header: "#000000",
@@ -66,6 +73,7 @@ const theme = {
       label: "#888888",
     },
     amoled: {
+      theme: "dark",
       color: "#C7C7C7",
       background: "#000000",
       header: "#000000",
