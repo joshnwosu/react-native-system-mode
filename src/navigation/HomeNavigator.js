@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "../screens/HomeScreen";
@@ -6,16 +6,18 @@ import { Platform, Text, TouchableOpacity } from "react-native";
 import DetailsScreen from "../screens/DetailsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import ColorScreen from "../screens/ColorScreen";
+import themeContext from "../config/themeContext";
 const Stack = createNativeStackNavigator();
 
 export default function HomeNavigator() {
+  const theme = useContext(themeContext);
   return (
     <Stack.Navigator
       screenOptions={{
         // headerTransparent: Platform.OS == "ios" ? true : false,
-        // headerBlurEffect: "dark",
+        // headerBlurEffect: theme.theme == "light" ? "light" : "dark",
         // headerLargeStyle: {
-        //   backgroundColor: "#F8F7F8",
+        //   backgroundColor: theme.background,
         // },
         // headerStyle: {
         //   backgroundColor: Platform.OS == "android" && "#F8F7F8",
@@ -29,9 +31,9 @@ export default function HomeNavigator() {
         options={{
           title: "Home",
           headerLargeTitle: true,
-          headerSearchBarOptions: {
-            placeholder: "Search Github",
-          },
+          // headerSearchBarOptions: {
+          //   placeholder: "Search Github",
+          // },
           headerRight: () => (
             <TouchableOpacity onPress={() => alert("This is a button!")}>
               <Ionicons name="add-circle-outline" color="blue" size={24} />

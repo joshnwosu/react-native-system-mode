@@ -5,8 +5,9 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useScrollToTop } from "@react-navigation/native";
+import themeContext from "../config/themeContext";
 
 const DATA = [
   {
@@ -46,66 +47,6 @@ const DATA = [
   },
   {
     id: "58694a0f-3da1-471f-bd96-145571e29d72",
-    title: "Eigth Item",
-    color: "#444",
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e29d72",
-    title: "Nineth Item",
-    color: "magenta",
-  },
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item",
-    color: "brown",
-  },
-  {
-    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-    title: "Second Item",
-    color: "white",
-  },
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item",
-    color: "red",
-  },
-  {
-    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-    title: "Second Item",
-    color: "blue",
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e29d72",
-    title: "Third Item",
-    color: "purple",
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e29d72",
-    title: "Fourth Item",
-    color: "orange",
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e29d72",
-    title: "Fifth Item",
-    color: "yellow",
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e29d72",
-    title: "Sixth Item",
-    color: "green",
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e29d72",
-    title: "Seventh Item",
-    color: "purple",
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e29d72",
-    title: "Eigth Item",
-    color: "#444",
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e29d72",
     title: "Nineth Item",
     color: "magenta",
   },
@@ -121,29 +62,30 @@ const DATA = [
   },
 ];
 
-const Item = ({ item, navigation }) => (
+const Item = ({ item, navigation, theme }) => (
   <TouchableOpacity
     onPress={() => {
       navigation.navigate("ColorScreen", { bgColor: item.color });
     }}
-    style={[styles.item, { backgroundColor: item.color }]}
+    style={[styles.item, { backgroundColor: theme.card }]}
   >
-    <Text style={styles.title}>{item.color}</Text>
+    <Text style={[styles.title, { color: item.color }]}>{item.color}</Text>
   </TouchableOpacity>
 );
 
 export default HomeScreen = ({ navigation }) => {
   const ref = React.useRef(null);
+  const theme = useContext(themeContext);
 
-  useScrollToTop(ref);
+  useScrollToTop(
+    React.useRef({
+      scrollToTop: () => ref.current?.scrollToOffset({ offset: -140 }),
+    })
+  );
 
-  // useScrollToTop(
-  //   React.useRef({
-  //     scrollToTop: () => ref.current?.scrollToOffset({ offset: 100 }),
-  //   })
-  // );
-
-  const renderItem = ({ item }) => <Item item={item} navigation={navigation} />;
+  const renderItem = ({ item }) => (
+    <Item item={item} navigation={navigation} theme={theme} />
+  );
   return (
     <FlatList
       ref={ref}
@@ -151,17 +93,20 @@ export default HomeScreen = ({ navigation }) => {
       contentInsetAdjustmentBehavior="automatic"
       renderItem={renderItem}
       keyExtractor={(_, index) => index.toString()}
+      scrollToOverflowEnabled={true}
     />
   );
 };
 
 const styles = StyleSheet.create({
   item: {
-    backgroundColor: "#fff",
+    backgroundColor: "#222",
     padding: 20,
-    // marginVertical: 8,
+    marginVertical: 8,
     marginHorizontal: 16,
-    borderRadius: 0,
+    borderRadius: 10,
+    height: 100,
+    color: "#fff",
   },
   title: {
     fontSize: 20,

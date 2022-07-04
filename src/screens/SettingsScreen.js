@@ -51,9 +51,7 @@ export default function SettingsScreen() {
   return (
     <ScrollView style={[styles.container]}>
       <View style={[styles.themeSettings]}>
-        <View
-          style={[styles.headerSettings, { backgroundColor: theme.header }]}
-        >
+        <View style={[styles.headerSettings]}>
           <Text style={[styles.headerSettingsText, { color: theme.label }]}>
             APPEARNCE
           </Text>
@@ -84,7 +82,16 @@ export default function SettingsScreen() {
                 setSystemMode(value);
                 EventRegister.emit("useSystemTheme", value);
               }}
-              ios_backgroundColor={theme.label}
+              ios_backgroundColor={theme.background}
+              trackColor={
+                theme.theme != "dark"
+                  ? {
+                      true: theme.label,
+                      false: "#bbb",
+                    }
+                  : { false: "#bbb" }
+              }
+              thumbColor={"#ffffff"}
             />
           </View>
 
@@ -104,7 +111,16 @@ export default function SettingsScreen() {
                   setMode(value);
                   EventRegister.emit("changeTheme", value);
                 }}
-                ios_backgroundColor={theme.label}
+                ios_backgroundColor={theme.background}
+                trackColor={
+                  theme.theme != "dark"
+                    ? {
+                        true: theme.label,
+                        false: "#bbb",
+                      }
+                    : { false: "#bbb" }
+                }
+                thumbColor={"#ffffff"}
               />
             </View>
           )}
@@ -274,9 +290,7 @@ export default function SettingsScreen() {
       </View>
 
       <View style={[styles.themeSettings]}>
-        <View
-          style={[styles.headerSettings, { backgroundColor: theme.header }]}
-        >
+        <View style={[styles.headerSettings]}>
           <Text style={[styles.headerSettingsText, { color: theme.label }]}>
             ABOUT
           </Text>
@@ -321,9 +335,7 @@ export default function SettingsScreen() {
       </View>
 
       <View style={[styles.themeSettings]}>
-        <View
-          style={[styles.headerSettings, { backgroundColor: theme.header }]}
-        >
+        <View style={[styles.headerSettings]}>
           <Text style={[styles.headerSettingsText, { color: theme.label }]}>
             SUPPORT
           </Text>
