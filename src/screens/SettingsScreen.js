@@ -391,7 +391,8 @@ export default function SettingsScreen() {
         style={{
           justifyContent: "center",
           alignItems: "center",
-          paddingVertical: 5,
+          paddingVertical: 10,
+          paddingBottom: 50,
         }}
       >
         <Text
@@ -400,6 +401,14 @@ export default function SettingsScreen() {
           }}
         >
           You are Xpense 2022.24.0.309244
+        </Text>
+        <Text
+          style={{
+            color: theme.color,
+            fontWeight: "bold",
+          }}
+        >
+          Acknownledgements
         </Text>
       </View>
     </ScrollView>
