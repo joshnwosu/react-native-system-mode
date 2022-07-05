@@ -391,21 +391,24 @@ export default function SettingsScreen() {
         style={{
           justifyContent: "center",
           alignItems: "center",
-          paddingVertical: 10,
+          paddingTop: 20,
           paddingBottom: 50,
+          // opacity: 0.7,
         }}
       >
         <Text
           style={{
-            color: theme.color,
+            color: theme.label,
+            fontSize: 12,
           }}
         >
-          You are Xpense 2022.24.0.309244
+          You are using Xpenditure - version: 0.0.1
         </Text>
         <Text
           style={{
-            color: theme.color,
-            fontWeight: "bold",
+            color: theme.label,
+            fontWeight: "700",
+            fontSize: 12,
           }}
         >
           Acknownledgements
