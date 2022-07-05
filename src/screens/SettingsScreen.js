@@ -387,7 +387,13 @@ export default function SettingsScreen() {
         </View>
       </View>
 
-      <View style={{ justifyContent: "center", alignItems: "center" }}>
+      <View
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          paddingVertical: 5,
+        }}
+      >
         <Text
           style={{
             color: theme.color,
