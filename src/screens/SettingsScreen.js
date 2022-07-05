@@ -386,6 +386,16 @@ export default function SettingsScreen() {
           </TouchableOpacity>
         </View>
       </View>
+
+      <View style={{ justifyContent: "center", alignItems: "center" }}>
+        <Text
+          style={{
+            color: theme.color,
+          }}
+        >
+          You are Xpense 2022.24.0.309244
+        </Text>
+      </View>
     </ScrollView>
   );
 }
