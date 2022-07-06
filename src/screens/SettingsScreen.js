@@ -386,6 +386,34 @@ export default function SettingsScreen() {
           </TouchableOpacity>
         </View>
       </View>
+
+      <View
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          paddingTop: 20,
+          paddingBottom: 50,
+          // opacity: 0.7,
+        }}
+      >
+        <Text
+          style={{
+            color: theme.label,
+            fontSize: 12,
+          }}
+        >
+          You are using Xpenditure - version: 0.0.1
+        </Text>
+        <Text
+          style={{
+            color: theme.label,
+            fontWeight: "700",
+            fontSize: 12,
+          }}
+        >
+          Acknownledgements
+        </Text>
+      </View>
     </ScrollView>
   );
 }
