@@ -10,7 +10,7 @@ export default ProfileScreen = (props) => {
     console.log("Hello");
     TutorialService.getAll()
       .then((res) => console.log("The Res: ", res.data))
-      .catch((err) => console.log("Error: ", err));
+      .catch((err) => console.log("Error: ", err.message));
   }, []);
 
   return (
