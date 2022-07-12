@@ -1,9 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Button, ScrollView, StyleSheet, Text, View } from "react-native";
 import themeContext from "../config/themeContext";
+import TutorialService from "../services/tutorials";
 
 export default ProfileScreen = (props) => {
   const theme = useContext(themeContext);
+
+  useEffect(() => {
+    console.log("Hello");
+    TutorialService.getAll()
+      .then((res) => console.log("The Res: ", res.data))
+      .catch((err) => console.log("Error: ", err));
+  }, []);
+
   return (
     <ScrollView
       contentInsetAdjustmentBehavior="automatic"

@@ -31,7 +31,7 @@ const AppNavigator = () => {
           fontWeight: "700",
         },
         tabBarHideOnKeyboard: true,
-        // tabBarShowLabel: false,
+        tabBarShowLabel: false,
         // tabBarStyle: {
         //   // height: 100,
         //   position: "absolute",

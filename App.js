@@ -16,6 +16,8 @@ import theme from "./src/config/theme";
 
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 const App = () => {
   const [mode, setMode] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
@@ -30,9 +32,9 @@ const App = () => {
     colors: {
       ...DefaultTheme.colors,
       // primary: "#222222",
-      primary: theme.light[accentColor].label,
-      background: theme.light[accentColor].background,
-      card: theme.light[accentColor].card,
+      primary: theme?.light[accentColor]?.label,
+      background: theme?.light[accentColor]?.background,
+      card: theme?.light[accentColor]?.card,
     },
   };
 
@@ -42,16 +44,28 @@ const App = () => {
       ...DarkTheme.colors,
       primary: "#EEEEEE",
       // primary: theme.dark[darkAccentColor].label,
-      background: theme.dark[darkAccentColor].background,
-      card: theme.dark[darkAccentColor].card,
+      background: theme?.dark[darkAccentColor]?.background,
+      card: theme?.dark[darkAccentColor]?.card,
     },
   };
+
+  // useEffect(async () => {
+  //   const appData = await AsyncStorage.getItem("isAppFirstLaunched");
+  //   if (appData == null) {
+  //     setIsAppFirstLaunched(true);
+  //     AsyncStorage.setItem("isAppFirstLaunched", "false");
+  //   } else {
+  //     setIsAppFirstLaunched(false);
+  //   }
+  // });
 
   useEffect(() => {
     let eventListener = EventRegister.addEventListener(
       "changeTheme",
-      (data) => {
+      async (data) => {
         setDarkMode(data);
+        if (data) await AsyncStorage.setItem("darkMode", "true");
+        else await AsyncStorage.setItem("darkMode", "false");
       }
     );
     return () => {
@@ -62,8 +76,11 @@ const App = () => {
   useEffect(() => {
     let eventListener = EventRegister.addEventListener(
       "useSystemTheme",
-      (data) => {
+      async (data) => {
         setSystemMode(data);
+        // store value locally.
+        if (data) await AsyncStorage.setItem("systemMode", "true");
+        else await AsyncStorage.setItem("systemMode", "false");
       }
     );
     return () => {
@@ -74,8 +91,10 @@ const App = () => {
   useEffect(() => {
     let eventListener = EventRegister.addEventListener(
       "accentColor",
-      (data) => {
+      async (data) => {
         setAccentColor(data);
+        if (data) await AsyncStorage.setItem("accentColor", "true");
+        else await AsyncStorage.setItem("accentColor", "false");
       }
     );
     return () => {
@@ -105,8 +124,26 @@ const App = () => {
     }
   };
 
+  const fetchFromLocalStorage = async () => {
+    const accentColor = await AsyncStorage.getItem("accentColor");
+    const systemMode = await AsyncStorage.getItem("systemMode");
+    const darkMode = await AsyncStorage.getItem("darkMode");
+
+    if (accentColor == "true") setAccentColor(true);
+    else if (accentColor == "false") setAccentColor(false);
+
+    if (systemMode == "true") setSystemMode(true);
+    else if (systemMode == "false") setSystemMode(false);
+
+    if (darkMode == "true") setDarkMode(true);
+    else if (darkMode == "false") setDarkMode(false);
+
+    console.log({ accentColor, systemMode, darkMode });
+  };
+
   useEffect(() => {
     themeHandler();
+    // fetchFromLocalStorage();
   }, [colorScheme, systemMode, darkMode]);
 
   return (
