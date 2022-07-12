@@ -9,7 +9,7 @@ const get = (id) => {
 };
 
 const create = (data) => {
-  return http.post("/tutorial", data);
+  return http.post("/tutorials", data);
 };
 
 const update = (id, data) => {
@@ -17,7 +17,7 @@ const update = (id, data) => {
 };
 
 const remove = (id) => {
-  return http.delete(`tutorials/${id}`);
+  return http.delete(`/tutorials/${id}`);
 };
 
 const removeAll = () => {
@@ -25,7 +25,7 @@ const removeAll = () => {
 };
 
 const findByTitle = (title) => {
-  return http.get(`tutorials?title=${title}`);
+  return http.get(`/tutorials?title=${title}`);
 };
 
 const TutorialService = {
