@@ -6,12 +6,15 @@ import TutorialService from "../services/tutorials";
 export default ProfileScreen = (props) => {
   const theme = useContext(themeContext);
 
-  useEffect(() => {
-    console.log("Hello");
-    TutorialService.getAll()
-      .then((res) => console.log("The Res: ", res.data))
-      .catch((err) => console.log("Error: ", err));
-  }, []);
+  // I commented this because of network errors
+  // Uncomment once you have network connection
+
+  // useEffect(() => {
+  //   console.log("Hello");
+  //   TutorialService.getAll()
+  //     .then((res) => console.log("The Res: ", res.data))
+  //     .catch((err) => console.log("Error: ", err.message));
+  // }, []);
 
   return (
     <ScrollView
