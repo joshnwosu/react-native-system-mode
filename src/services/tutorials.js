@@ -24,8 +24,8 @@ const removeAll = () => {
   return http.delete(`/tutorials`);
 };
 
-const findByTitle = (title) => {
-  return http.get(`/tutorials?title=${title}`);
+const findByQuery = (query) => {
+  return http.get(`/tutorials?title=${query}&description=${query}`);
 };
 
 const TutorialService = {
@@ -35,7 +35,7 @@ const TutorialService = {
   update,
   remove,
   removeAll,
-  findByTitle,
+  findByQuery,
 };
 
 export default TutorialService;
