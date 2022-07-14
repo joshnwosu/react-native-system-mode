@@ -52,7 +52,10 @@ export default function NotificationScreen() {
           />
         )}
         keyExtractor={(item) => item.login.username}
-        ListHeaderComponent={() => (
+        // ListHeaderComponent={() => (
+        //   <Button onPress={handleAdd} title="Add Person" />
+        // )}
+        ListFooterComponent={() => (
           <Button onPress={handleAdd} title="Add Person" />
         )}
       />
