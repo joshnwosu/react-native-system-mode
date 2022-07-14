@@ -17,6 +17,13 @@ import theme from "./src/config/theme";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { configureStore } from "@reduxjs/toolkit";
+import { Provider } from "react-redux";
+import rootReducer from "./src/redux/reducer";
+
+const store = configureStore({
+  reducer: rootReducer,
+});
 
 const App = () => {
   const [mode, setMode] = useState(false);
@@ -148,22 +155,24 @@ const App = () => {
 
   return (
     <>
-      <themeContext.Provider
-        value={
-          mode == true
-            ? theme.dark[darkAccentColor] || theme.dark
-            : theme.light[accentColor] || theme.light
-        }
-      >
-        <StatusBar style={mode == true ? "light" : "dark"} />
-        <ActionSheetProvider>
-          <NavigationContainer
-            theme={mode == true ? CustomDarkTheme : CustomDefaultTheme}
-          >
-            <AppNavigator />
-          </NavigationContainer>
-        </ActionSheetProvider>
-      </themeContext.Provider>
+      <Provider store={store}>
+        <themeContext.Provider
+          value={
+            mode == true
+              ? theme.dark[darkAccentColor] || theme.dark
+              : theme.light[accentColor] || theme.light
+          }
+        >
+          <StatusBar style={mode == true ? "light" : "dark"} />
+          <ActionSheetProvider>
+            <NavigationContainer
+              theme={mode == true ? CustomDarkTheme : CustomDefaultTheme}
+            >
+              <AppNavigator />
+            </NavigationContainer>
+          </ActionSheetProvider>
+        </themeContext.Provider>
+      </Provider>
     </>
   );
 };
