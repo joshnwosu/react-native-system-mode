@@ -1,51 +1,16 @@
 import React, { useContext, useEffect } from "react";
 import { Button, ScrollView, StyleSheet, Text, View } from "react-native";
+import TodoApp from "../components/TodoApp";
 import themeContext from "../config/themeContext";
 import TutorialService from "../services/tutorials";
 
 export default ProfileScreen = (props) => {
   const theme = useContext(themeContext);
 
-  // I commented this because of network errors
-  // Uncomment once you have network connection
-
-  // useEffect(() => {
-  //   console.log("Hello");
-  //   TutorialService.getAll()
-  //     .then((res) => console.log("The Res: ", res.data))
-  //     .catch((err) => console.log("Error: ", err.message));
-  // }, []);
-
   return (
-    <ScrollView
-      contentInsetAdjustmentBehavior="automatic"
-      contentContainerStyle={{
-        flex: 1,
-        alignItems: "center",
-        paddingHorizontal: 10,
-      }}
-    >
-      <View
-        style={[
-          styles.shadowProp,
-          {
-            width: "100%",
-            height: 300,
-            backgroundColor: "#ED5B92",
-            marginBottom: 10,
-            borderRadius: 10,
-          },
-        ]}
-      />
-      <Button
-        title="Go to Details"
-        onPress={() => props.navigation.navigate("DetailsScreen")}
-      />
-      <Button
-        title="Go to Settings"
-        onPress={() => props.navigation.navigate("SettingsScreen2")}
-      />
-    </ScrollView>
+    <>
+      <TodoApp props={props} />
+    </>
   );
 };
 
