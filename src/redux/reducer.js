@@ -1,4 +1,4 @@
 import todos from "./todoSlice";
-import { combineReducers } from "@reduxjs/toolkit";
+import { combineReducers } from "redux";
 
 export default combineReducers({ todos });
