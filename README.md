@@ -4,9 +4,11 @@ Use inbuilt system settings like Appearnce, Fonts etc.
 
 ## Dark Theme
 
-<img src="assets/RN-system-mode/IMG_3344.PNG" alt="Amoled" width="200">
-<img src="assets/RN-system-mode/IMG_3345.PNG" alt="Night" width="200">
+<div>
+<img align="left" src="assets/RN-system-mode/IMG_3344.PNG" alt="Amoled" width="200">
+<img align="left" src="assets/RN-system-mode/IMG_3345.PNG" alt="Night" width="200">
 <img src="assets/RN-system-mode/IMG_3346.PNG" alt="Default" width="200">
+</div>
 
 <!-- ![Amoled](assets/RN-system-mode/IMG_3344.PNG)
 ![Night](assets/RN-system-mode/IMG_3345.PNG)
