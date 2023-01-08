@@ -2,4 +2,4 @@
 
 Use inbuilt system settings like Appearnce, Fonts etc.
 
-<img align="left" alt="JavaScript" src="https://img.shields.io/badge/Javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E" />
+<img align="left" alt="JavaScript" src="https://drive.google.com/file/d/1JztT_epapqh-jssM_y_oJHCnMRR1ajgV/view?usp=share_link" />
