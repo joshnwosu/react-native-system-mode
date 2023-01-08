@@ -4,11 +4,9 @@ Use inbuilt system settings like Appearnce, Fonts etc.
 
 ## Dark Theme
 
-<div>
 <img align="left" src="assets/RN-system-mode/IMG_3344.PNG" alt="Amoled" width="200">
 <img align="left" src="assets/RN-system-mode/IMG_3345.PNG" alt="Night" width="200">
 <img src="assets/RN-system-mode/IMG_3346.PNG" alt="Default" width="200">
-</div>
 
 <!-- ![Amoled](assets/RN-system-mode/IMG_3344.PNG)
 ![Night](assets/RN-system-mode/IMG_3345.PNG)
@@ -16,8 +14,8 @@ Use inbuilt system settings like Appearnce, Fonts etc.
 
 ## Light Theme
 
-<img src="assets/RN-system-mode/IMG_3347.PNG" alt="Fire" width="200">
-<img src="assets/RN-system-mode/IMG_3349.PNG" alt="Ice" width="200">
+<img align="left" src="assets/RN-system-mode/IMG_3347.PNG" alt="Fire" width="200">
+<img align="left" src="assets/RN-system-mode/IMG_3349.PNG" alt="Ice" width="200">
 <img src="assets/RN-system-mode/IMG_3348.PNG" alt="Default" width="200">
 
 <!-- ![Fire](assets/RN-system-mode/IMG_3347.PNG)
