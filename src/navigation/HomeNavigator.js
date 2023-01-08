@@ -29,6 +29,7 @@ export default function HomeNavigator() {
         name="HomeScreen"
         component={HomeScreen}
         options={{
+          headerShown: false,
           title: "Home",
           headerLargeTitle: true,
           // headerSearchBarOptions: {
@@ -50,9 +51,10 @@ export default function HomeNavigator() {
         name="ColorScreen"
         component={ColorScreen}
         options={({ route }) => ({
-          title: route.params.bgColor,
+          // title: route.params.bgColor,
           // headerLargeTitle: true,
           presentation: "modal",
+
           // headerShown: false,
           // headerStyle: {
           //   backgroundColor: "white",
